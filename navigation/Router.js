@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import HomeTabNavigator from './HomeTabNavigator';
 import DestinationSearchScreen from '../screens/DestinationSearch';
 import GuestsScreen from '../screens/Guests';
 
@@ -11,6 +12,14 @@ const Router = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
+          name={'Home'}
+          component={HomeTabNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        {/* <Stack.Screen
           name={'Destination Search'}
           component={DestinationSearchScreen}
           options={{
@@ -24,7 +33,7 @@ const Router = () => {
           options={{
             title: 'How many people?',
           }}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
