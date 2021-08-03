@@ -1,13 +1,25 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, FlatList, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  TextInput,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import SearchResults from '../../assets/data/search';
+import {useNavigation} from '@react-navigation/native';
 
 const DestinationSearchScreen = () => {
   const [inputText, setInputText] = useState('');
 
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => navigation.navigate('Guests')}>
       <TextInput
         style={styles.textInput}
         placeholder="Where are you going?"
@@ -26,7 +38,7 @@ const DestinationSearchScreen = () => {
           </View>
         )}
       />
-    </View>
+    </Pressable>
   );
 };
 

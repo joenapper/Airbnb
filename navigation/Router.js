@@ -19,7 +19,7 @@ const Router = () => {
           }}
         />
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name={'Destination Search'}
           component={DestinationSearchScreen}
           options={{
@@ -33,7 +33,7 @@ const Router = () => {
           options={{
             title: 'How many people?',
           }}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

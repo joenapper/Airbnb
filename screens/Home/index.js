@@ -8,11 +8,16 @@ import {
   Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Fontisto';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View>
-      <Pressable style={styles.searchButton}>
+      <Pressable
+        style={styles.searchButton}
+        onPress={() => navigation.navigate('Destination Search')}>
         <Icon name="search" size={25} color={'#f15454'} />
         <Text style={styles.searchButtonText}>Where are you going?</Text>
       </Pressable>
@@ -67,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: 20,
+    top: 40,
     zIndex: 100,
   },
   searchButtonText: {
