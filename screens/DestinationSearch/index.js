@@ -1,67 +1,45 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  TextInput,
-  FlatList,
-  StyleSheet,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/dist/Entypo';
-import SearchResults from '../../assets/data/search';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import SuggestionRow from './SuggestionRow';
 
 const DestinationSearchScreen = () => {
-  const [inputText, setInputText] = useState('');
-
   const navigation = useNavigation();
 
   return (
-    <Pressable
-      style={styles.container}
-      onPress={() => navigation.navigate('Guests')}>
-      <TextInput
-        style={styles.textInput}
+    <View style={styles.container}>
+      <GooglePlacesAutocomplete
         placeholder="Where are you going?"
-        value={inputText}
-        onChangeText={setInputText}
+        onPress={(data, details = null) => {
+          console.log(data, details);
+          navigation.navigate('Guests');
+        }}
+        fetchDetails
+        styles={{
+          textInput: styles.textInput,
+        }}
+        query={{
+          key: 'AIzaSyDeMWv8SeVI9qt5N54Z0Hp8DfWfhoq16NA',
+          language: 'en',
+          types: '(cities)',
+        }}
+        suppressDefaultStyles
+        renderRow={item => <SuggestionRow item={item} />}
       />
-
-      <FlatList
-        data={SearchResults}
-        renderItem={({item}) => (
-          <View style={styles.row}>
-            <View style={styles.iconContainer}>
-              <Icon name="location-pin" size={35} />
-            </View>
-            <Text>{item.description}</Text>
-          </View>
-        )}
-      />
-    </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    margin: 20,
+    padding: 20,
+    height: '100%',
+    backgroundColor: 'white',
   },
   textInput: {
     fontSize: 20,
     marginBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderColor: 'lightgrey',
-  },
-  iconContainer: {
-    backgroundColor: '#d4d4d4',
-    padding: 7,
-    borderRadius: 10,
-    marginRight: 15,
   },
 });
 
